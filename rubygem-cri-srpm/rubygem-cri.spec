@@ -34,12 +34,7 @@ Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 
 %description doc
->> puts "this is red".red
->> puts "this is red with a blue background (read: ugly_".red_on_blue
->> puts "this is red with an underline".red.underline
->> puts "this is really bold and really blue".bold.blue
->> logger.debug "this is really broken!".red_on_yellow    # in rails
->> puts color.red "This is red" # but this part is mostly untested
+Documentation for %{name}.
 
 Windows users
   You will need the Win32 Console Ansi gem.
@@ -72,6 +67,7 @@ cp -a .%{gem_dir}/* \
 %doc %{gem_instdir}/test
 %doc %{gem_instdir}/CODE_OF_CONDUCT.md
 %doc %{gem_instdir}/NEWS.md
+%doc %{gem_instdir}/README.md
 
 %changelog
 * Sat Jun 1 2019 Nico Kadel-Garcia <nkadel@gmail.com> - 2.15.7-0
