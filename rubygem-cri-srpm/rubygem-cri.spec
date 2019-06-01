@@ -3,7 +3,7 @@
 Name: rubygem-%{gem_name}
 Version: 2.15.7
 Release: 0%{?dist}
-Summary: Puppet environment and module deployment
+Summary: Colorize ruby gems
 Group: Development/Languages
 License: GPLv2+ or Artistic or MIT
 URL: https://rubygems.org/gems/cri
@@ -14,23 +14,18 @@ BuildRequires: ruby(release)
 
 Requires:	ruby(rubygems)
 
-Requires:	rubygem(colored) = 1.2
-Requires:	rubygem(cri) >= 2.15.1
-Requires:	rubygem(cri) < 2.16
-Requires:	rubygem(gettext-setup) >= 0.24
-Requires:	rubygem(gettext-setup) < 1
-Requires:	rubygem(log4r) = 1.1.10
-Requires:	rubygem(multi_json) >= 1.10
-Requires:	rubygem(multi_json) < 2
-Requires:	rubygem(puppet_forge) >= 2.2
-Requires:	rubygem(puppet_forge) < 2.3
-
 BuildArch: noarch
 
 %description
-Cri provides a general purpose toolset for deploying Puppet environments and
-modules. It implements the [Puppetfile](doc/puppetfile.mkd) format and provides a native
-implementation of Puppet [dynamic environments][workflow].
+>> puts "this is red".red
+>> puts "this is red with a blue background (read: ugly_".red_on_blue
+>> puts "this is red with an underline".red.underline
+>> puts "this is really bold and really blue".bold.blue
+>> logger.debug "this is really broken!".red_on_yellow    # in rails
+>> puts color.red "This is red" # but this part is mostly untested
+
+Windows users
+  You will need the Win32 Console Ansi gem.
 
 %package doc
 Summary: Documentation for %{name}
@@ -39,7 +34,15 @@ Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 
 %description doc
-Documentation for %{name}.
+>> puts "this is red".red
+>> puts "this is red with a blue background (read: ugly_".red_on_blue
+>> puts "this is red with an underline".red.underline
+>> puts "this is really bold and really blue".bold.blue
+>> logger.debug "this is really broken!".red_on_yellow    # in rails
+>> puts color.red "This is red" # but this part is mostly untested
+
+Windows users
+  You will need the Win32 Console Ansi gem.
 
 %prep
 %setup -q -c  -T
@@ -69,6 +72,7 @@ cp -a .%{gem_dir}/* \
 %doc %{gem_instdir}/test
 %doc %{gem_instdir}/CODE_OF_CONDUCT.md
 %doc %{gem_instdir}/NEWS.md
-%doc %{gem_instdir}/README.md
 
 %changelog
+* Sat Jun 1 2019 Nico Kadel-Garcia <nkadel@gmail.com> - 2.15.7-0
+- Initial setup
