@@ -31,9 +31,7 @@ Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 
 %description doc
-This is a simple gem to set up i18n for Ruby projects (including [Sinatra](http://www.sinatrarb.com/) web apps) using gettext and fast gettext.
-
-This project sets the default locale to English. If the user has set a different locale in their browser preferences, and we support the user's preferred locale, strings and data formatting will be customized for that locale.
+Documentation for %{name}.
 
 %prep
 %setup -q -c  -T
@@ -55,11 +53,11 @@ cp -a .%{gem_dir}/* \
 %exclude %{gem_cache}
 %{gem_libdir}
 %{gem_spec}
+%doc %{gem_instdir}/README.md
 
 %files doc
 %doc %{gem_docdir}
-%doc %{gem_instdir}/README.md
 
 %changelog
-* Sat Jun 1 2019 Nico Kadel-Garcia <nkadel@gmail.com> - 2.15.7-0
+* Sat Jun 1 2019 Nico Kadel-Garcia <nkadel@gmail.com> - 0.30-0
 - Initial setup
