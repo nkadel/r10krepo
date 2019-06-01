@@ -1,0 +1,23 @@
+From 49b9f4ca66583395ddfa91503afd7593f069de18 Mon Sep 17 00:00:00 2001
+From: Kouhei Sutou <kou@clear-code.com>
+Date: Sat, 16 Jun 2018 12:08:50 +0900
+Subject: [PATCH] test: omit per thread $SAFE test on Ruby 2.6
+
+---
+ test/test_gettext.rb | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/test/test_gettext.rb b/test/test_gettext.rb
+index b107891..0f6449c 100644
+--- a/test/test_gettext.rb
++++ b/test/test_gettext.rb
+@@ -352,6 +352,9 @@ def test_frozen
+   end
+ 
+   def test_safe_mode
++    if RUBY_VERSION >= "2.6.0"
++      omit("Per thread $SAFE is removed since Ruby 2.6.")
++    end
+     Thread.start{
+       $SAFE = 1
+       GetText.bindtextdomain("test1", :path => "locale")
