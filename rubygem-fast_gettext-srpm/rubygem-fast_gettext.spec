@@ -58,5 +58,5 @@ cp -a .%{gem_dir}/* \
 %doc %{gem_instdir}/Readme.md
 
 %changelog
-* Sat Jun 1 2019 Nico Kadel-Garcia <nkadel@gmail.com> - 2.15.7-0
+* Sat Jun 1 2019 Nico Kadel-Garcia <nkadel@gmail.com> - 2.0.1-0
 - Initial setup
