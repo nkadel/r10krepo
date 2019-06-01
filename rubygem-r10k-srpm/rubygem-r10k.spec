@@ -86,6 +86,7 @@ sed -i 's|^#!.*|#!/usr/bin/ruby|' %{buildroot}%{gem_instdir}/bin/*
 %{gem_instdir}/locales
 %{gem_instdir}/docker
 %{gem_instdir}/integration
+%{gem_instdir}/spec
 %{gem_libdir}
 %{gem_spec}
 %doc %{gem_instdir}/r10k.yaml.example
@@ -98,6 +99,5 @@ sed -i 's|^#!.*|#!/usr/bin/ruby|' %{buildroot}%{gem_instdir}/bin/*
 %doc %{gem_docdir}
 %doc %{gem_instdir}/doc/
 %{gem_instdir}/Rakefile
-%{gem_instdir}/spec
 
 %changelog
