@@ -14,16 +14,17 @@ BuildRequires: ruby(release)
 
 Requires:	ruby >= 2.3.0
 Requires:	ruby(rubygems)
-Requires:	rubygem(colored) = 1.2
-Requires:	rubygem(cri) >= 2.15.1
-Requires:	rubygem(cri) < 2.16
-Requires:	rubygem(gettext-setup) >= 0.24
-Requires:	rubygem(gettext-setup) < 1
-Requires:	rubygem(log4r) = 1.1.10
-Requires:	rubygem(multi_json) >= 1.10
-Requires:	rubygem(multi_json) < 2
-Requires:	rubygem(puppet_forge) >= 2.2
-Requires:	rubygem(puppet_forge) < 2.3
+# Allow compilation to deduce Requires
+#Requires:	rubygem(colored) = 1.2
+#Requires:	rubygem(cri) >= 2.15.1
+#Requires:	rubygem(cri) < 2.16
+#Requires:	rubygem(gettext-setup) >= 0.24
+#Requires:	rubygem(gettext-setup) < 1
+#Requires:	rubygem(log4r) = 1.1.10
+#Requires:	rubygem(multi_json) >= 1.10
+#Requires:	rubygem(multi_json) < 2
+#Requires:	rubygem(puppet_forge) >= 2.2
+#Requires:	rubygem(puppet_forge) < 2.3
 
 BuildArch: noarch
 
