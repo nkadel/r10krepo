@@ -1,0 +1,15 @@
+[r10krepo]
+name=r10k repo - $basearch
+baseurl=file://@REPOBASEDIR@/r10krepo/@RELEASEDIR@/$releasever/$basearch
+enabled=0
+# Expire very quickly for locally updated repo
+metadata_expire=1
+gpgcheck=0
+
+[r10krepo-source]
+name=r10k repo - Source
+baseurl=file://@REPOBASEDIR@/r10krepo/@RELEASEDIR@/$releasever/SRPMS/
+enabled=0
+# Expire very quickly for locally updated repo
+metadata_expire=1
+gpgcheck=0
