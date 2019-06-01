@@ -31,7 +31,8 @@
 Summary:	Pure ruby library which provides basic APIs for localization
 Name:		rubygem-%{gem_name}
 Version:	2.1.2
-Release:	%{fedorarel}%{?dist}.6
+#Release:	%%{fedorarel}%%{?dist}.6
+Release:	%{fedorarel}%{?dist}.0
 License:	GPLv2 or Ruby
 URL:		http://locale.rubyforge.org/
 %if	0%{?usegit} >= 1
