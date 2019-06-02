@@ -1,7 +1,4 @@
 %global	gem_name	test-unit-rr
-%if 0%{?fedora} < 19
-%global	rubyabi	1.9.1
-%endif
 
 Summary:	Test::Unit::RR - RR adapter for Test::Unit
 Name:		rubygem-%{gem_name}
@@ -13,15 +10,8 @@ License:	LGPLv2+
 URL:		http://rubyforge.org/projects/test-unit/
 Source0:	http://rubygems.org/gems/%{gem_name}-%{version}.gem
 
-%if 0%{?fedora} < 19 && 0%{?rhel} < 8
-BuildRequires:	ruby(abi) = %{rubyabi}
-BuildRequires:	ruby 
-Requires:	ruby(abi) = %{rubyabi}
-Requires:	ruby 
-%else
 BuildRequires:	ruby(release)
 Requires:	ruby(release)
-%endif
 BuildRequires:	rubygems-devel 
 BuildRequires:	rubygem(test-unit)
 BuildRequires:	rubygem(rr)
@@ -108,6 +98,7 @@ ruby -Ilib test/run-test.rb
 %changelog
 * Sat Jun 1 2019 Nico Kadel-Garcia <nkadel@gmail.com> - 1.0.5-0
 - Backport to RHEL
+- Discard obsolete rubyabi requirements
 
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.5-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
