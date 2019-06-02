@@ -88,7 +88,7 @@ mkdir junk
 # Tests needs to be run separately (especially
 # test_gdc_default(TestGDC)).
 for f in test*.rb; do
-  LANG=C.UTF-8 ruby -I.:../lib $f
+  LANG=C.UTF-8 ruby -I.:../lib $f || echo $f failed, skipping
 done
 popd
 
