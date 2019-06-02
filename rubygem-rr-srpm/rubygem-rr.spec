@@ -1,35 +1,17 @@
 %global gem_name rr
 
-%global rubyabi 1.9.1
-  
-%if 0%{?fedora} >= 17
-  %global rubyabi 1.9.1
-%endif
-
-%if 0%{?fedora} >= 19
-  %global rubyabi 2.0.0
-%endif
-
 Summary: RR (Double Ruby) is a test double framework 
 Name: rubygem-%{gem_name}
 Version: 1.1.2
-Release: 10%{?dist}
+#Release: 10%%{?dist}
+Release: 0%{?dist}
 License: MIT
 URL: http://pivotallabs.com
 Source0: http://rubygems.org/gems/%{gem_name}-%{version}.gem
 Source1: http://s3.amazonaws.com/rubygem-rr/tests/v%{version}.tar.gz
 
-%if 0%{?fedora} >= 19 || 0%{?rhel} > 7
 Requires:       ruby(release)
-%endif
-
-%if 0%{?fedora} >= 17 && 0%{?fedora} < 19
-Requires:      ruby(abi) = %{rubyabi}
-%endif
-
-%if 0%{?fedora} <= 17 && 0%{?rhel} <= 7
-Requires: ruby(rubygems) 
-%endif
+Requires:	ruby(rubygems) 
 
 BuildRequires: ruby-irb
 BuildRequires: rubygems-devel
@@ -79,7 +61,9 @@ export CONFIGURE_ARGS="--with-cflags='%{optflags}'"
 # We set that to be a local directory so that we can move it into the
 # buildroot in %%install
 
-%if 0%{?fedora} >= 17 && 0%{?fedora} <= 18
+%if 0%{?fedora} >= 19 || 0%{?rhel} > 7
+%gem_install
+%else
 gem install -V \
         --local \
         --install-dir ./%{gem_dir} \
@@ -88,16 +72,13 @@ gem install -V \
         --rdoc \
         --ri \
         %{gem_name}-%{version}.gem
-%endif
-
-%if 0%{?fedora} >= 19 || 0%{?rhel} > 7
-%gem_install
-%endif
+%endif # fedora >= 19 || rhel > 7
 
 tar -xvzf %{SOURCE1}
 
+# Skip all testing until further notice
 # Run automated tests
-%check
+#%check
 ##ruby spec/suites/minitest/*_test.rb
 ##ruby spec/suites/test_unit/*_test.rb
 
@@ -138,6 +119,9 @@ rm  -rf %{buildroot}%{gem_instdir}/gemfiles
 %{gem_instdir}/rr.gemspec
 
 %changelog
+* Sat Jun 1 2019 Nico Kadel-Garcia <nkadel@gmail.com> - 1.1.2-0
+- Backport to RHEL
+
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.2-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
