@@ -5,7 +5,8 @@
 
 Name:		rubygem-%{gem_name}
 Version:	3.2.9
-Release:	5%{?dist}
+#Release:	5%%{?dist}
+Release:	0%{?dist}
 Summary:	RubyGem of Localization Library and Tools for Ruby
 
 License:	Ruby
@@ -161,6 +162,9 @@ popd
 %exclude	%{gem_instdir}/src/
 
 %changelog
+* Sat Jun 1 2019 Nico Kadel-Garcia <nkadel@gmail.com> - 3.2.9-0
+- Backport to RHEL
+
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.2.9-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
