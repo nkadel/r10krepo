@@ -14,6 +14,7 @@ BuildRequires: ruby-irb
 BuildRequires: rubygems-devel
 BuildRequires: rubygem(test-unit)
 BuildArch: noarch
+Provides: rubygem(%{gem_name}) = %{version}-%{release}
 
 %description
 Session offers a set of classes built upon Open3::popen3 for driving
@@ -73,6 +74,7 @@ rm  %{buildroot}%{gem_instdir}/session.gemspec
 * Sat Jun 1 2019 Nico Kadel-Garcia <nkadel@gmail.com> - 3.1.0-0
 - Port to RHEL
 - Disable check to allow compilation in realtime
+- Add Provides line
 
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.1.0-16
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
