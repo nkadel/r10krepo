@@ -1,7 +1,4 @@
 %global	gem_name	test-unit-notify
-%if 0%{?fedora} < 19
-%global	rubyabi	1.9.1
-%endif
 
 Summary:	Test::Unit::Notify - A test result notify extension for Test::Unit
 Name:		rubygem-%{gem_name}
@@ -12,15 +9,8 @@ License:	LGPLv2+ and (LGPLv2+ or GFDL or CC-BY-SA)
 URL:		http://rubyforge.org/projects/test-unit/
 Source0:	http://rubygems.org/gems/%{gem_name}-%{version}.gem
 
-%if 0%{?fedora} >= 19
 Requires:	ruby(release)
 BuildRequires:	ruby(release)
-%else
-Requires:	ruby(abi) = %{rubyabi}
-Requires:	ruby 
-BuildRequires:	ruby(abi) = %{rubyabi}
-BuildRequires:	ruby 
-%endif
 Requires:	ruby(rubygems) 
 Requires:	rubygem(test-unit)
 BuildRequires:	rubygems-devel 
