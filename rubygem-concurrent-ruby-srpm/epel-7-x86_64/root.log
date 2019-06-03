@@ -1,0 +1,173 @@
+INFO buildroot.py:350:  Mock Version: 1.4.13
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/dev/pts
+DEBUG util.py:119:  creating dir: /var/lib/mock/epel-7-x86_64/root/dev/pts
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/dev/shm
+DEBUG util.py:119:  creating dir: /var/lib/mock/epel-7-x86_64/root/dev/shm
+DEBUG buildroot.py:481:  kernel version == 4.18.0-80.el8.x86_64
+DEBUG util.py:129:  touching file: /var/lib/mock/epel-7-x86_64/root/etc/fstab
+DEBUG util.py:129:  touching file: /var/lib/mock/epel-7-x86_64/root/etc/yum/yum.conf
+DEBUG util.py:129:  touching file: /var/lib/mock/epel-7-x86_64/root/etc/dnf/dnf.conf
+DEBUG util.py:129:  touching file: /var/lib/mock/epel-7-x86_64/root/var/log/yum.log
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/var/cache/yum/
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/mount', '-n', '--bind', '/var/cache/mock/epel-7-x86_64/yum_cache/', '/var/lib/mock/epel-7-x86_64/root/var/cache/yum/'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG buildroot.py:143:  rootdir = /var/lib/mock/epel-7-x86_64/root
+DEBUG buildroot.py:144:  resultdir = /home/nkadel/git/r10krepo/rubygem-concurrent-ruby-srpm/epel-7-x86_64
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/etc/pki/mock
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/etc/yum/pluginconf.d
+DEBUG package_manager.py:256:  configure yum
+DEBUG package_manager.py:268:  configure yum priorities
+DEBUG package_manager.py:270:  configure yum rhnplugin
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/usr/bin/systemd-nspawn', '-q', '-M', '3576e83f22fa4a55afa37b19158b8006', '-D', '/var/lib/mock/epel-7-x86_64/root', '-a', '--setenv=TERM=vt100', '--setenv=SHELL=/bin/bash', '--setenv=HOME=/builddir', '--setenv=HOSTNAME=mock', '--setenv=PATH=/usr/bin:/bin:/usr/sbin:/sbin', '--setenv=PROMPT_COMMAND=printf "\\033]0;<mock-chroot>\\007"', '--setenv=PS1=<mock-chroot> \\s-\\v\\$ ', '--setenv=LANG=C', '/usr/sbin/userdel', '-r', '-f', 'mockbuild'] with env {'TERM': 'vt100', 'SHELL': '/bin/bash', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PROMPT_COMMAND': 'printf "\\033]0;<mock-chroot>\\007"', 'PS1': '<mock-chroot> \\s-\\v\\$ ', 'LANG': 'C'} and shell False
+DEBUG util.py:325:  Unsharing. Flags: 134217728
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/usr/bin/systemd-nspawn', '-q', '-M', 'de626708536b462c9f7e96912e1b2c44', '-D', '/var/lib/mock/epel-7-x86_64/root', '-a', '--setenv=TERM=vt100', '--setenv=SHELL=/bin/bash', '--setenv=HOME=/builddir', '--setenv=HOSTNAME=mock', '--setenv=PATH=/usr/bin:/bin:/usr/sbin:/sbin', '--setenv=PROMPT_COMMAND=printf "\\033]0;<mock-chroot>\\007"', '--setenv=PS1=<mock-chroot> \\s-\\v\\$ ', '--setenv=LANG=C', '/usr/sbin/groupdel', 'mock'] with env {'TERM': 'vt100', 'SHELL': '/bin/bash', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PROMPT_COMMAND': 'printf "\\033]0;<mock-chroot>\\007"', 'PS1': '<mock-chroot> \\s-\\v\\$ ', 'LANG': 'C'} and shell False
+DEBUG util.py:325:  Unsharing. Flags: 134217728
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/usr/bin/systemd-nspawn', '-q', '-M', 'd5379f33959b49bcb793f300e7547625', '-D', '/var/lib/mock/epel-7-x86_64/root', '-a', '--setenv=TERM=vt100', '--setenv=SHELL=/bin/bash', '--setenv=HOME=/builddir', '--setenv=HOSTNAME=mock', '--setenv=PATH=/usr/bin:/bin:/usr/sbin:/sbin', '--setenv=PROMPT_COMMAND=printf "\\033]0;<mock-chroot>\\007"', '--setenv=PS1=<mock-chroot> \\s-\\v\\$ ', '--setenv=LANG=C', '/usr/sbin/groupadd', '-g', '135', 'mock'] with env {'TERM': 'vt100', 'SHELL': '/bin/bash', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PROMPT_COMMAND': 'printf "\\033]0;<mock-chroot>\\007"', 'PS1': '<mock-chroot> \\s-\\v\\$ ', 'LANG': 'C'} and shell False
+DEBUG util.py:325:  Unsharing. Flags: 134217728
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/usr/bin/systemd-nspawn', '-q', '-M', 'b89674cf40684adea33de07157444d12', '-D', '/var/lib/mock/epel-7-x86_64/root', '-a', '--setenv=TERM=vt100', '--setenv=SHELL=/bin/bash', '--setenv=HOME=/builddir', '--setenv=HOSTNAME=mock', '--setenv=PATH=/usr/bin:/bin:/usr/sbin:/sbin', '--setenv=PROMPT_COMMAND=printf "\\033]0;<mock-chroot>\\007"', '--setenv=PS1=<mock-chroot> \\s-\\v\\$ ', '--setenv=LANG=C', '/usr/sbin/useradd', '-o', '-m', '-u', '1000', '-g', '135', '-d', '/builddir', '-n', 'mockbuild'] with env {'TERM': 'vt100', 'SHELL': '/bin/bash', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PROMPT_COMMAND': 'printf "\\033]0;<mock-chroot>\\007"', 'PS1': '<mock-chroot> \\s-\\v\\$ ', 'LANG': 'C'} and shell False
+DEBUG util.py:325:  Unsharing. Flags: 134217728
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/builddir/build/RPMS
+DEBUG util.py:119:  creating dir: /var/lib/mock/epel-7-x86_64/root/builddir/build/RPMS
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/builddir/build/SPECS
+DEBUG util.py:119:  creating dir: /var/lib/mock/epel-7-x86_64/root/builddir/build/SPECS
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/builddir/build/SRPMS
+DEBUG util.py:119:  creating dir: /var/lib/mock/epel-7-x86_64/root/builddir/build/SRPMS
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/builddir/build/SOURCES
+DEBUG util.py:119:  creating dir: /var/lib/mock/epel-7-x86_64/root/builddir/build/SOURCES
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/builddir/build/BUILD
+DEBUG util.py:119:  creating dir: /var/lib/mock/epel-7-x86_64/root/builddir/build/BUILD
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/builddir/build/BUILDROOT
+DEBUG util.py:119:  creating dir: /var/lib/mock/epel-7-x86_64/root/builddir/build/BUILDROOT
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/builddir/build/originals
+DEBUG util.py:119:  creating dir: /var/lib/mock/epel-7-x86_64/root/builddir/build/originals
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/proc
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/mount', '-n', '-t', 'proc', 'proc', '/var/lib/mock/epel-7-x86_64/root/proc'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/sys
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/mount', '-n', '-t', 'sysfs', 'sysfs', '/var/lib/mock/epel-7-x86_64/root/sys'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/dev/shm
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/mount', '-n', '-t', 'tmpfs', 'tmpfs', '/var/lib/mock/epel-7-x86_64/root/dev/shm'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/dev/pts
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/mount', '-n', '-t', 'devpts', '-o', 'gid=5,mode=0620,ptmxmode=0666,newinstance', 'devpts', '/var/lib/mock/epel-7-x86_64/root/dev/pts'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG package_manager.py:118:  ['/usr/bin/yum', '--installroot', '/var/lib/mock/epel-7-x86_64/root/', '-y', '--releasever', '7', 'update']
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/usr/bin/yum', '--installroot', '/var/lib/mock/epel-7-x86_64/root/', '-y', '--releasever', '7', 'update'] with env {'TERM': 'vt100', 'SHELL': '/bin/bash', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PROMPT_COMMAND': 'printf "\\033]0;<mock-chroot>\\007"', 'PS1': '<mock-chroot> \\s-\\v\\$ ', 'LANG': 'C', 'LC_MESSAGES': 'C.UTF-8'} and shell False
+DEBUG util.py:492:  Updating Subscription Management repositories.
+DEBUG util.py:492:  Unable to read consumer identity
+DEBUG util.py:492:  This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.
+DEBUG util.py:492:  BaseOS                                           43 MB/s |  10 MB     00:00    
+DEBUG util.py:492:  epel                                             52 MB/s |  16 MB     00:00    
+DEBUG util.py:492:  extras                                          9.6 MB/s | 366 kB     00:00    
+DEBUG util.py:492:  sclo                                             44 MB/s | 997 kB     00:00    
+DEBUG util.py:492:  sclo-rh                                          63 MB/s |  14 MB     00:00    
+DEBUG util.py:492:  updates                                          54 MB/s | 7.8 MB     00:00    
+DEBUG util.py:492:  Last metadata expiration check: 0:00:01 ago on Mon Jun  3 05:56:19 2019.
+DEBUG util.py:492:  Dependencies resolved.
+DEBUG util.py:492:  Nothing to do.
+DEBUG util.py:492:  Complete!
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/umount', '-n', '-l', '/var/lib/mock/epel-7-x86_64/root/dev/pts'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/umount', '-n', '-l', '/var/lib/mock/epel-7-x86_64/root/dev/shm'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/umount', '-n', '-l', '/var/lib/mock/epel-7-x86_64/root/sys'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/umount', '-n', '-l', '/var/lib/mock/epel-7-x86_64/root/proc'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:129:  touching file: /var/lib/mock/epel-7-x86_64/root/.initialized
+DEBUG buildroot.py:369:  removing 3 rpm db files
+DEBUG buildroot.py:374:  nuke_rpm_db: removing /var/lib/mock/epel-7-x86_64/root/var/lib/rpm/__db.001
+DEBUG buildroot.py:374:  nuke_rpm_db: removing /var/lib/mock/epel-7-x86_64/root/var/lib/rpm/__db.002
+DEBUG buildroot.py:374:  nuke_rpm_db: removing /var/lib/mock/epel-7-x86_64/root/var/lib/rpm/__db.003
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/usr/bin/systemd-nspawn', '-q', '-M', '92f9e96dea3742018b7e04658f443753', '-D', '/var/lib/mock/epel-7-x86_64/root', '-a', '--capability=cap_ipc_lock', '--bind=/tmp/mock-resolv.3h841o67:/etc/resolv.conf', '--setenv=TERM=vt100', '--setenv=SHELL=/bin/bash', '--setenv=HOME=/builddir', '--setenv=HOSTNAME=mock', '--setenv=PATH=/usr/bin:/bin:/usr/sbin:/sbin', '--setenv=PROMPT_COMMAND=printf "\\033]0;<mock-chroot>\\007"', '--setenv=PS1=<mock-chroot> \\s-\\v\\$ ', '--setenv=LANG=C', '-u', 'mockbuild', '/bin/rpm', '-Uvh', '--nodeps', '/builddir/build/originals/epel-7-x86_64.src.rpm'] with env {'TERM': 'vt100', 'SHELL': '/bin/bash', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PROMPT_COMMAND': 'printf "\\033]0;<mock-chroot>\\007"', 'PS1': '<mock-chroot> \\s-\\v\\$ ', 'LANG': 'C'} and shell False
+DEBUG util.py:325:  Unsharing. Flags: 1073741824
+DEBUG util.py:325:  Unsharing. Flags: 134217728
+DEBUG util.py:492:  Updating / installing...
+DEBUG util.py:492:  rubygem-concurrent-ruby-1.0.5-0.el8   ########################################
+DEBUG util.py:490:  BUILDSTDERR: warning: user nkadel does not exist - using root
+DEBUG util.py:490:  BUILDSTDERR: warning: group nkadel does not exist - using root
+DEBUG util.py:490:  BUILDSTDERR: warning: user nkadel does not exist - using root
+DEBUG util.py:490:  BUILDSTDERR: warning: group nkadel does not exist - using root
+DEBUG util.py:490:  BUILDSTDERR: warning: user nkadel does not exist - using root
+DEBUG util.py:490:  BUILDSTDERR: warning: group nkadel does not exist - using root
+DEBUG util.py:490:  BUILDSTDERR: warning: user nkadel does not exist - using root
+DEBUG util.py:490:  BUILDSTDERR: warning: group nkadel does not exist - using root
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/usr/bin/systemd-nspawn', '-q', '-M', '25101fe0dfdc44e0a71baab01b8550b1', '-D', '/var/lib/mock/epel-7-x86_64/root', '-a', '--capability=cap_ipc_lock', '--bind=/tmp/mock-resolv.3h841o67:/etc/resolv.conf', '--setenv=TERM=vt100', '--setenv=SHELL=/bin/bash', '--setenv=HOME=/builddir', '--setenv=HOSTNAME=mock', '--setenv=PATH=/usr/bin:/bin:/usr/sbin:/sbin', '--setenv=PROMPT_COMMAND=printf "\\033]0;<mock-chroot>\\007"', '--setenv=PS1=<mock-chroot> \\s-\\v\\$ ', '--setenv=LANG=C', '-u', 'mockbuild', '/bin/rpm', '-qpl', '/builddir/build/originals/epel-7-x86_64.src.rpm'] with env {'TERM': 'vt100', 'SHELL': '/bin/bash', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PROMPT_COMMAND': 'printf "\\033]0;<mock-chroot>\\007"', 'PS1': '<mock-chroot> \\s-\\v\\$ ', 'LANG': 'C'} and shell False
+DEBUG util.py:325:  Unsharing. Flags: 1073741824
+DEBUG util.py:325:  Unsharing. Flags: 134217728
+DEBUG util.py:492:  concurrent-ruby-1.0.5-fix-inspect-output.patch
+DEBUG util.py:492:  concurrent-ruby-1.0.5-specs.tar.gz
+DEBUG util.py:492:  concurrent-ruby-1.0.5.gem
+DEBUG util.py:492:  rubygem-concurrent-ruby.spec
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:325:  Unsharing. Flags: 1073741824
+DEBUG util.py:325:  Unsharing. Flags: 134217728
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/proc
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/mount', '-n', '-t', 'proc', 'proc', '/var/lib/mock/epel-7-x86_64/root/proc'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/sys
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/mount', '-n', '-t', 'sysfs', 'sysfs', '/var/lib/mock/epel-7-x86_64/root/sys'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/dev/shm
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/mount', '-n', '-t', 'tmpfs', 'tmpfs', '/var/lib/mock/epel-7-x86_64/root/dev/shm'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:116:  ensuring that dir exists: /var/lib/mock/epel-7-x86_64/root/dev/pts
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/mount', '-n', '-t', 'devpts', '-o', 'gid=5,mode=0620,ptmxmode=0666,newinstance', 'devpts', '/var/lib/mock/epel-7-x86_64/root/dev/pts'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG package_manager.py:118:  ['/usr/bin/yum-builddep', '--installroot', '/var/lib/mock/epel-7-x86_64/root/', '--releasever', '7', '/var/lib/mock/epel-7-x86_64/root//builddir/build/SRPMS/rubygem-concurrent-ruby-1.0.5-0.el7.src.rpm']
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/usr/bin/yum-builddep', '--installroot', '/var/lib/mock/epel-7-x86_64/root/', '--releasever', '7', '/var/lib/mock/epel-7-x86_64/root//builddir/build/SRPMS/rubygem-concurrent-ruby-1.0.5-0.el7.src.rpm'] with env {'TERM': 'vt100', 'SHELL': '/bin/bash', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PROMPT_COMMAND': 'printf "\\033]0;<mock-chroot>\\007"', 'PS1': '<mock-chroot> \\s-\\v\\$ ', 'LANG': 'C', 'LC_MESSAGES': 'C.UTF-8'} and shell False
+DEBUG util.py:492:  Updating Subscription Management repositories.
+DEBUG util.py:492:  Unable to read consumer identity
+DEBUG util.py:492:  This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.
+DEBUG util.py:492:  Last metadata expiration check: 0:00:17 ago on Mon Jun  3 05:56:19 2019.
+DEBUG util.py:490:  BUILDSTDERR: No matching package to install: 'rubygem(timecop)'
+DEBUG util.py:490:  BUILDSTDERR: Not all dependencies satisfied
+DEBUG util.py:490:  BUILDSTDERR: Error: Some packages could not be found.
+DEBUG util.py:634:  Child return code was: 1
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/umount', '-n', '-l', '/var/lib/mock/epel-7-x86_64/root/dev/pts'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/umount', '-n', '-l', '/var/lib/mock/epel-7-x86_64/root/dev/shm'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/umount', '-n', '-l', '/var/lib/mock/epel-7-x86_64/root/sys'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/umount', '-n', '-l', '/var/lib/mock/epel-7-x86_64/root/proc'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:228:  kill orphans
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['/bin/umount', '-n', '/var/lib/mock/epel-7-x86_64/root/var/cache/yum/'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False
+DEBUG util.py:634:  Child return code was: 0
+DEBUG util.py:653:  child environment: None
+DEBUG util.py:579:  Executing command: ['btrfs', 'subv', 'list', '/var/lib/mock'] with env {'TERM': 'vt100', 'SHELL': '/bin/sh', 'HOME': '/builddir', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'LANG': 'C'} and shell False

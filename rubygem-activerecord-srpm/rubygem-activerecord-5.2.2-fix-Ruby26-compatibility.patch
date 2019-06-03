@@ -1,0 +1,26 @@
+From d237c7c72ccfd87302983669f83c8c90d2aec82e Mon Sep 17 00:00:00 2001
+From: Alberto Almagro <albertoalmagro@gmail.com>
+Date: Fri, 4 Jan 2019 00:27:12 +0100
+Subject: [PATCH 2/2] Make average compatible accross Ruby versions
+
+Since Ruby 2.6.0 NilClass#to_d is returning `BigDecimal` 0.0, this
+breaks `average` compatibility with prior Ruby versions. This patch
+makes `average` return `nil` in all Ruby versions when there are no
+rows.
+---
+ activerecord/lib/active_record/relation/calculations.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/activerecord/lib/active_record/relation/calculations.rb b/activerecord/lib/active_record/relation/calculations.rb
+index 3ef6e7928fcf..c2c4a5a88244 100644
+--- a/activerecord/lib/active_record/relation/calculations.rb
++++ b/activerecord/lib/active_record/relation/calculations.rb
+@@ -401,7 +401,7 @@ def type_cast_calculated_value(value, type, operation = nil)
+         case operation
+         when "count"   then value.to_i
+         when "sum"     then type.deserialize(value || 0)
+-        when "average" then value.respond_to?(:to_d) ? value.to_d : value
++        when "average" then value&.respond_to?(:to_d) ? value.to_d : value
+         else type.deserialize(value)
+         end
+       end

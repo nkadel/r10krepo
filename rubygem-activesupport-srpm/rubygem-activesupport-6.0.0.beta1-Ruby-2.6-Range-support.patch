@@ -1,0 +1,136 @@
+From 0fcb921a65e615c301450d7820b03473acd53898 Mon Sep 17 00:00:00 2001
+From: utilum <oz@utilum.com>
+Date: Sun, 20 May 2018 21:22:03 +0200
+Subject: [PATCH] Allow Range#=== and Range#cover? on Range
+
+ruby/ruby@989e07c features switching `Range#===` to use internal `r_cover_p`
+instead of rubyland `include?`. This breaks expected behavior of
+`ActiveSupport::CoreExt::Range` documented since at least 8b67a02.
+
+This patch adds overrides on `Range#cover?` and `Range#===` and places all
+three in a single module, `CompareWithRange`.
+
+*Requiring core_ext/range/include_range now causes a deprecation warnning*
+---
+ .../lib/active_support/core_ext/range.rb      |  2 +-
+ .../core_ext/range/compare_range.rb           | 61 +++++++++++++++++++
+ .../core_ext/range/include_range.rb           | 28 ++-------
+ 3 files changed, 68 insertions(+), 23 deletions(-)
+ create mode 100644 activesupport/lib/active_support/core_ext/range/compare_range.rb
+
+diff --git a/activesupport/lib/active_support/core_ext/range.rb b/activesupport/lib/active_support/core_ext/range.rb
+index 4074e91d17d7..78814fd18961 100644
+--- a/activesupport/lib/active_support/core_ext/range.rb
++++ b/activesupport/lib/active_support/core_ext/range.rb
+@@ -1,7 +1,7 @@
+ # frozen_string_literal: true
+ 
+ require "active_support/core_ext/range/conversions"
+-require "active_support/core_ext/range/include_range"
++require "active_support/core_ext/range/compare_range"
+ require "active_support/core_ext/range/include_time_with_zone"
+ require "active_support/core_ext/range/overlaps"
+ require "active_support/core_ext/range/each"
+diff --git a/activesupport/lib/active_support/core_ext/range/compare_range.rb b/activesupport/lib/active_support/core_ext/range/compare_range.rb
+new file mode 100644
+index 000000000000..704041f6de88
+--- /dev/null
++++ b/activesupport/lib/active_support/core_ext/range/compare_range.rb
+@@ -0,0 +1,61 @@
++# frozen_string_literal: true
++
++module ActiveSupport
++  module CompareWithRange #:nodoc:
++    # Extends the default Range#=== to support range comparisons.
++    #  (1..5) === (1..5) # => true
++    #  (1..5) === (2..3) # => true
++    #  (1..5) === (2..6) # => false
++    #
++    # The native Range#=== behavior is untouched.
++    #  ('a'..'f') === ('c') # => true
++    #  (5..9) === (11) # => false
++    def ===(value)
++      if value.is_a?(::Range)
++        # 1...10 includes 1..9 but it does not include 1..10.
++        operator = exclude_end? && !value.exclude_end? ? :< : :<=
++        super(value.first) && value.last.send(operator, last)
++      else
++        super
++      end
++    end
++
++    # Extends the default Range#include? to support range comparisons.
++    #  (1..5).include?(1..5) # => true
++    #  (1..5).include?(2..3) # => true
++    #  (1..5).include?(2..6) # => false
++    #
++    # The native Range#include? behavior is untouched.
++    #  ('a'..'f').include?('c') # => true
++    #  (5..9).include?(11) # => false
++    def include?(value)
++      if value.is_a?(::Range)
++        # 1...10 includes 1..9 but it does not include 1..10.
++        operator = exclude_end? && !value.exclude_end? ? :< : :<=
++        super(value.first) && value.last.send(operator, last)
++      else
++        super
++      end
++    end
++
++    # Extends the default Range#cover? to support range comparisons.
++    #  (1..5).cover?(1..5) # => true
++    #  (1..5).cover?(2..3) # => true
++    #  (1..5).cover?(2..6) # => false
++    #
++    # The native Range#cover? behavior is untouched.
++    #  ('a'..'f').cover?('c') # => true
++    #  (5..9).cover?(11) # => false
++    def cover?(value)
++      if value.is_a?(::Range)
++        # 1...10 covers 1..9 but it does not cover 1..10.
++        operator = exclude_end? && !value.exclude_end? ? :< : :<=
++        super(value.first) && value.last.send(operator, last)
++      else
++        super
++      end
++    end
++  end
++end
++
++Range.prepend(ActiveSupport::CompareWithRange)
+diff --git a/activesupport/lib/active_support/core_ext/range/include_range.rb b/activesupport/lib/active_support/core_ext/range/include_range.rb
+index 7ba1011921ba..2da2c587a31f 100644
+--- a/activesupport/lib/active_support/core_ext/range/include_range.rb
++++ b/activesupport/lib/active_support/core_ext/range/include_range.rb
+@@ -1,25 +1,9 @@
+ # frozen_string_literal: true
+ 
+-module ActiveSupport
+-  module IncludeWithRange #:nodoc:
+-    # Extends the default Range#include? to support range comparisons.
+-    #  (1..5).include?(1..5) # => true
+-    #  (1..5).include?(2..3) # => true
+-    #  (1..5).include?(2..6) # => false
+-    #
+-    # The native Range#include? behavior is untouched.
+-    #  ('a'..'f').include?('c') # => true
+-    #  (5..9).include?(11) # => false
+-    def include?(value)
+-      if value.is_a?(::Range)
+-        # 1...10 includes 1..9 but it does not include 1..10.
+-        operator = exclude_end? && !value.exclude_end? ? :< : :<=
+-        super(value.first) && value.last.send(operator, last)
+-      else
+-        super
+-      end
+-    end
+-  end
+-end
++require "active_support/deprecation"
+ 
+-Range.prepend(ActiveSupport::IncludeWithRange)
++ActiveSupport::Deprecation.warn "You have required `active_support/core_ext/range/include_range`. " \
++"This file will be removed in Rails 6.1. You should require `active_support/core_ext/range/compare_range` " \
++  "instead."
++
++require "active_support/core_ext/range/compare_range"

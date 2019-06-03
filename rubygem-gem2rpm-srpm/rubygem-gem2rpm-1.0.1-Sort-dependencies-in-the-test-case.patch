@@ -1,0 +1,38 @@
+From 4b40d342761a3fdc402fbddccccaa99f38c50ddd Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?V=C3=ADt=20Ondruch?= <vondruch@redhat.com>
+Date: Wed, 6 Feb 2019 14:56:13 +0100
+Subject: [PATCH 1/2] Sort dependencies in the test case.
+
+Some versions of RubyGems might or might not sort the requirements. The
+order should not be important for this test case, so sort the entries.
+But otherwise keep the RubyGems upstream sort order.
+
+https://github.com/rubygems/rubygems/issues/2627
+---
+ test/test_gem2rpm.rb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/test/test_gem2rpm.rb b/test/test_gem2rpm.rb
+index 4f3ce9f..325922a 100644
+--- a/test/test_gem2rpm.rb
++++ b/test/test_gem2rpm.rb
+@@ -57,7 +57,7 @@ foo
+   end
+ 
+   def test_print_dependencies
+-    dependencies = <<-END.gsub(/^ */, '')
++    dependencies = <<-END.gsub(/^ */, '').lines.sort
+       rubygem(test_runtime) >= 1.0
+       rubygem(test_runtime) < 2
+       rubygem(test_runtime) >= 1.0.0
+@@ -71,6 +71,6 @@ foo
+       @out
+     )
+ 
+-    assert_equal dependencies, @out.string
++    assert_equal dependencies, @out.string.lines.sort
+   end
+ end
+-- 
+2.20.1
+

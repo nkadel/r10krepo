@@ -12,13 +12,45 @@ REPOBASE = file://$(PWD)
 #REPOBASE = http://localhost
 
 # Compilable with EPEL
-EPELPKGS+=rubygem-cri-srpm
+EPELPKGS+=rubygem-builder-srpm
 EPELPKGS+=rubygem-colored-srpm
+EPELPKGS+=rubygem-cri-srpm
+EPELPKGS+=rubygem-fast_gettext-srpm
+EPELPKGS+=rubygem-fattr-srpm
 EPELPKGS+=rubygem-gettext-setup-srpm
+EPELPKGS+=rubygem-json_pure-srpm
+EPELPKGS+=rubygem-minitest4-srpm
+EPELPKGS+=rubygem-puppet_forge-srpm
 EPELPKGS+=rubygem-r10k-srpm
+EPELPKGS+=rubygem-session-srpm
 
-# Actually compilable with epel-6-x86_64
-#EPELPKGS+=python-r10k-srpm
+# Requires other local packages
+
+# Requires rubygem-json_pure
+R10KPKGS+=rubygem-multi_json-srpm
+
+# Requires rubygem-builder
+R10KPKGS+=rubygem-log4r-srpm
+
+# Requires rubygem-minitest4
+R10KPKGS+=rubygem-text-srpm
+
+# Requires rubygem-session
+R10KPKGS+=rubygem-rr-srpm
+
+# Requires rubygem-rr
+R10KPKGS+=rubygem-test-unit-rr-srpm
+
+# Requires rubygem-rr
+R10KPKGS+=rubygem-test-unit-notify-srpm
+
+# Requires rubygem-rubygem-test-unit-rr
+R10KPKGS+=rubygem-locale-srpm
+
+# Requires rubygem-text
+R10KPKGS+=rubygem-gettext-srpm
+
+FOO=BAZ
 
 REPOS+=r10krepo/el/7
 REPOS+=r10krepo/el/8
@@ -43,7 +75,9 @@ all:: $(R10KPKGS)
 
 all install clean:: FORCE
 	@for name in $(EPELPKGS) $(R10KPKGS); do \
-	     (cd $$name; $(MAKE) $(MFLAGS) $@); \
+		pushd $$name; \
+		$(MAKE) $(MFLAGS) $@; \
+		popd; \
 	done  
 
 epel:: $(EPELPKGS)
@@ -51,7 +85,9 @@ epel:: $(EPELPKGS)
 # Build for locacl OS
 build:: FORCE
 	@for name in $(R10KPKGS); do \
-	     (cd $$name; $(MAKE) $(MFLAGS) $@); \
+		pushd $$name; \
+		$(MAKE) $(MFLAGS) $@; \
+		popd; \
 	done
 
 # Dependencies
@@ -123,7 +159,7 @@ r10krepo-f30-x86_64.cfg: /etc/mock/fedora-30-x86_64.cfg
 	@echo '[r10krepo]' >> $@
 	@echo 'name=r10krepo' >> $@
 	@echo 'enabled=1' >> $@
-	@echo 'baseurl=$(REPOBASE)/r10krepo/fedora/30x86_64/' >> $@
+	@echo 'baseurl=$(REPOBASE)/r10krepo/fedora/30/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
 	@echo 'metadata_expire=1' >> $@

@@ -26,6 +26,7 @@ Requires:	rubygem(puppet_forge) >= 2.2
 Requires:	rubygem(puppet_forge) < 2.3
 
 BuildArch: noarch
+Provides: rubygem(%{gem_name}) = %{version}-%{release}
 
 %description
 cute.

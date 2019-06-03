@@ -26,6 +26,7 @@ BuildRequires: rubygems-devel
 BuildRequires: rubygem(test-unit)
 BuildRequires: rubygem(builder)
 BuildArch: noarch
+Provides: rubygem(%{gem_name}) = %{version}-%{release}
 
 %description
 Log4r is a comprehensive and flexible logging library for use in Ruby programs.

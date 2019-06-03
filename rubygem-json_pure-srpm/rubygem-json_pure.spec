@@ -14,6 +14,7 @@ BuildRequires: rubygems-devel
 BuildRequires: rubygem(bigdecimal)
 BuildRequires: rubygem(test-unit)
 BuildArch: noarch
+Provides: rubygem(%{gem_name}) = %{version}-%{release}
 
 %package doc
 Summary: Documentation for %{name}

@@ -21,6 +21,7 @@ BuildRequires: rubygems-devel
 BuildRequires: ruby
 BuildRequires: rubygem(minitest)
 BuildArch: noarch
+Provides: rubygem(%{gem_name}) = %{version}-%{release}
 
 %description
 Builder provides a number of builder objects that make creating structured

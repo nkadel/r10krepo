@@ -1,0 +1,22 @@
+From 6ea356e9781e7696c48a3f9fc3ecbb0ddda5f198 Mon Sep 17 00:00:00 2001
+From: Vladimir Dementyev <dementiev.vm@gmail.com>
+Date: Wed, 2 Jan 2019 17:55:48 -0500
+Subject: [PATCH] fix activerecord reaper_test
+
+---
+ activerecord/test/cases/reaper_test.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/activerecord/test/cases/reaper_test.rb b/activerecord/test/cases/reaper_test.rb
+index b630f782bc5b..402ddcf05a0b 100644
+--- a/activerecord/test/cases/reaper_test.rb
++++ b/activerecord/test/cases/reaper_test.rb
+@@ -48,7 +48,7 @@ def test_some_time
+ 
+         reaper = ConnectionPool::Reaper.new(fp, 0.0001)
+         reaper.run
+-        until fp.reaped
++        until fp.flushed
+           Thread.pass
+         end
+         assert fp.reaped

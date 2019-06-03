@@ -13,6 +13,7 @@ BuildRequires:  ruby(release)
 BuildRequires:  rubygems-devel
 BuildRequires:  rubygem(test-unit)
 BuildArch:      noarch
+Provides: rubygem(%{gem_name}) = %{version}-%{release}
 
 %description
 The fattr gem is a Fatter attribute for Ruby

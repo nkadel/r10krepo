@@ -15,6 +15,7 @@ BuildRequires: ruby(release)
 Requires:	ruby(rubygems)
 
 BuildArch: noarch
+Provides: rubygem(%{gem_name}) = %{version}-%{release}
 
 %description
 >> puts "this is red".red

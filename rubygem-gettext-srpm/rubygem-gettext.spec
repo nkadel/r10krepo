@@ -34,8 +34,9 @@ Requires:	rubygem(text)
 Requires:	irb
 Provides:	rubygem(%{gem_name}) = %{version}-%{release}
 
-Obsoletes:	ruby-gettext-package <= %{version}-%{release}
-Provides:	ruby-gettext-package = %{version}-%{release}
+Obsoletes: ruby-gettext-package <= %{version}-%{release}
+Provides: ruby-gettext-package = %{version}-%{release}
+Provides: rubygem(%{gem_name}) = %{version}-%{release}
 
 BuildArch:	noarch
 

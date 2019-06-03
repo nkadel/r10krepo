@@ -11,8 +11,9 @@ Source0:http://rubygems.org/gems/%{gem_name}-%{version}.gem
 BuildRequires: rubygems-devel
 BuildRequires: rubygem(rspec)
 BuildRequires: ruby(release)
-Requires:	ruby(rubygems)
+Requires: ruby(rubygems)
 BuildArch: noarch
+Provides: rubygem(%{gem_name}) = %{version}-%{release}
 
 %description
 # Puppet Forge

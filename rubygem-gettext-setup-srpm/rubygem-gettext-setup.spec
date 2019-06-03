@@ -18,6 +18,7 @@ Requires:	rubygem(gettext) >= 3.0.2
 Requires:	rubygem(locale)
 
 BuildArch: noarch
+Provides: rubygem(%{gem_name}) = %{version}-%{release}
 
 %description
 This is a simple gem to set up i18n for Ruby projects (including [Sinatra](http://www.sinatrarb.com/) web apps) using gettext and fast gettext.

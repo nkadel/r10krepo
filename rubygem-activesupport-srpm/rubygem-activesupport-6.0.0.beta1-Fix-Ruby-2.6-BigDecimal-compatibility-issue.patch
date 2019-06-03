@@ -1,0 +1,28 @@
+From ab631b363e0bb4870fe535f3ef0d1751bfd14ae1 Mon Sep 17 00:00:00 2001
+From: utilum <oz@utilum.com>
+Date: Tue, 4 Dec 2018 13:46:00 +0100
+Subject: [PATCH] Another Ruby 2.6 BigDecimal compatibility issue
+
+This patch modifies XmlMini::Parsing["decimal"] to handle a string that
+contains an invalid number. Since [ruby/ruby@a0e438c#diff-6b866d482baf2bdfd8433893fb1f6d36R144](https://github.com/ruby/ruby/commit/a0e438cd3c28d2eaf4efa18243d5b6edafa14d88#diff-6b866d482baf2bdfd8433893fb1f6d36R144) this case raises an `ArgumentError`. `String.to_f` returns 0.0 if there is not a valid number at the start of the argument, so current behavior is conserved.
+
+See https://travis-ci.org/rails/rails/jobs/463180341#L6264
+
+Related: #34600, #34601
+---
+ activesupport/lib/active_support/xml_mini.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/activesupport/lib/active_support/xml_mini.rb b/activesupport/lib/active_support/xml_mini.rb
+index e42eee07a3ce..be298bf0a1ec 100644
+--- a/activesupport/lib/active_support/xml_mini.rb
++++ b/activesupport/lib/active_support/xml_mini.rb
+@@ -71,7 +71,7 @@ def content_type
+             begin
+               BigDecimal(number)
+             rescue ArgumentError
+-              BigDecimal("0")
++              BigDecimal(number.to_f.to_s)
+             end
+           else
+             BigDecimal(number)
