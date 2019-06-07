@@ -24,13 +24,15 @@ Requires: rubygem(json)
 # Let's keep Requires and BuildRequires sorted alphabeticaly
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel
-BuildRequires: ruby >= 2.2.2
+#BuildRequires: ruby >= 2.2.2
+BuildRequires: ruby
 BuildRequires: rubygem(bigdecimal)
 BuildRequires: rubygem(builder)
 BuildRequires: rubygem(concurrent-ruby)
 BuildRequires: rubygem(connection_pool)
 BuildRequires: rubygem(dalli)
-BuildRequires: (rubygem(i18n) >= 0.7 with rubygem(i18n) < 2)
+BuildRequires: rubygem(i18n) >= 0.7
+BuildRequires: rubygem(i18n) < 2
 BuildRequires: rubygem(minitest) >= 5.0.0
 BuildRequires: rubygem(rack)
 BuildRequires: rubygem(tzinfo) >= 1.1
