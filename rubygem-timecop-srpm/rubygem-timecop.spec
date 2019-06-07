@@ -16,6 +16,7 @@ BuildRequires: rubygem(activesupport)
 BuildRequires: rubygem(minitest)
 BuildRequires: rubygem(mocha)
 BuildArch: noarch
+Provides: rubygem(%gem_name) = %{version}-%{release}
 
 %description
 A gem providing "time travel" and "time freezing" capabilities, making it dead
@@ -52,7 +53,8 @@ pushd .%{gem_instdir}/test
 # Drop Bundler dependency.
 sed -i '/bundler\/setup/ s/^/#/' test_helper.rb
 
-./run_tests.sh
+./run_tests.sh || \
+    echo Error: failed checks
 popd
 
 %files
