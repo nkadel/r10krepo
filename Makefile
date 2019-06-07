@@ -15,16 +15,41 @@ REPOBASE = file://$(PWD)
 EPELPKGS+=rubygem-builder-srpm
 EPELPKGS+=rubygem-colored-srpm
 EPELPKGS+=rubygem-cri-srpm
-EPELPKGS+=rubygem-fast_gettext-srpm
 EPELPKGS+=rubygem-fattr-srpm
 EPELPKGS+=rubygem-gettext-setup-srpm
 EPELPKGS+=rubygem-json_pure-srpm
+EPELPKGS+=rubygem-minitest-srpm
 EPELPKGS+=rubygem-minitest4-srpm
 EPELPKGS+=rubygem-puppet_forge-srpm
 EPELPKGS+=rubygem-r10k-srpm
 EPELPKGS+=rubygem-session-srpm
+EPELPKGS+=rubygem-timecop-srpm
 
 # Requires other local packages
+
+# Requires rubygem-minitest > 5.0.0
+R10PKGS+=rubygem-connection_pool-srpm
+
+# Requires rubygem-timecop-srpm
+R10KPKGS+=rubygem-concurrent-ruby-srpm
+
+# Requires rubygem-concurrent-ruby
+R10KPKGS+=rubygem-rb-inotify-srpm
+
+# Requires rubygem-rb-notify
+R10KPKGS+=rubygem-listen-srpm
+
+# Requires rubygem-concurrent-ruby
+# Requires rubygem-connection_pool
+# Requires rubygem-listen
+# Requires rubygem-minitest > 5.0.0
+R10KPKGS+=rubygem-activesupport-srpm
+
+# Requires rubygem-activesupport
+R10KPKGS+=rubygem-activerecord-srpm
+
+# Requires rubygem-activerecord
+R10KPKGS+=rubygem-fast_gettext-srpm
 
 # Requires rubygem-json_pure
 R10KPKGS+=rubygem-multi_json-srpm
