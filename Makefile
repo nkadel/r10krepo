@@ -73,7 +73,7 @@ all:: $(REPODIRS)
 all:: $(EPELPKGS)
 all:: $(R10KPKGS)
 
-all install clean:: FORCE
+all install clean getsrc:: FORCE
 	@for name in $(EPELPKGS) $(R10KPKGS); do \
 		pushd $$name; \
 		$(MAKE) $(MFLAGS) $@; \
