@@ -4,7 +4,7 @@
 Name: rubygem-%{gem_name}
 Version: 2.2.0
 #Release: 2%{?dist}
-Release: 0%{?dist}
+Release: 0.1%{?dist}
 Summary: Generic connection pool for Ruby
 Group: Development/Languages
 License: MIT
@@ -17,7 +17,7 @@ BuildRequires: ruby
 #BuildRequires: rubygem(minitest)
 BuildRequires: rubygem(minitest) > 5
 BuildArch: noarch
-Provides: rubygem(%gem_name} = %{version}-%{release}
+Provides: rubygem(%gem_name) = %{version}-%{release}
 
 %description
 Generic connection pool for Ruby.
