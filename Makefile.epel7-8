@@ -12,9 +12,13 @@ RSYNCOPTS=-a --no-owner --no-group
 
 # "mock" configurations to build with, activate only as needed
 # Some RHEL dependencies are supplied locally in r10krepo
-MOCKS+=epel-7-x86_64
-#MOCKS+=epel-8-x86_64
+#MOCKS+=epel-7-x86_64
+MOCKS+=epel-8-x86_64
 #MOCKS+=fedora-30-x86_64
+
+#MOCKCFGS+=r10krepo-7-x86_64
+MOCKCFGS+=r10krepo-8-x86_64
+#MOCKCFGS+=r10krepo-30-x86_64
 
 # Local yum compatible RPM repository
 REPOBASEDIR="`/bin/pwd | xargs dirname`/r10krepo"
@@ -77,6 +81,9 @@ install:: $(MOCKS)
 	    echo "	Pushing RPMS to $$rpmdir"; \
 	    rsync $(RSYNCSAFEOPTS) --exclude=*.src.rpm --exclude=*debuginfo*.rpm $$repo/*.rpm $$rpmdir/. || exit 1; \
 	    createrepo -q --update $$rpmdir/.; \
+	done
+	@for name in $(MOCKCFGS); do \
+	     touch ../$(MOCKCFGS); \
 	done
 
 clean::

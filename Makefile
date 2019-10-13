@@ -8,8 +8,8 @@
 #	Set up local 
 
 # Rely on local nginx service poingint to file://$(PWD)/r10krepo
-REPOBASE = file://$(PWD)
-#REPOBASE = http://localhost
+#REPOBASE = file://$(PWD)
+REPOBASE = http://localhost
 
 # Compilable with EPEL
 EPELPKGS+=rubygem-builder-srpm
@@ -141,8 +141,11 @@ r10krepo-7-x86_64.cfg: /etc/mock/epel-7-x86_64.cfg
 	@echo Generating $@ from $?
 	@cat $? > $@
 	@sed -i 's/epel-7-x86_64/r10krepo-7-x86_64/g' $@
-	@echo '"""' >> $@
 	@echo >> $@
+	@echo "Disabling 'best=' for $@"
+	@sed -i '/^best=/d' $@
+	@echo "best=0" >> $@
+	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
 	@echo '[r10krepo]' >> $@
 	@echo 'name=r10krepo' >> $@
 	@echo 'enabled=1' >> $@
@@ -153,15 +156,16 @@ r10krepo-7-x86_64.cfg: /etc/mock/epel-7-x86_64.cfg
 	@echo 'gpgcheck=0' >> $@
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
-	@uniq -u $@ > $@~
-	@mv $@~ $@
 
 r10krepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo Generating $@ from $?
 	@cat $? > $@
-	@sed -i "s/'epel-8-x86_64'/'r10krepo-8-x86_64'/g" $@
-	@echo '"""' >> $@
+	@sed -i 's/epel-8-x86_64/r10krepo-8-x86_64/g' $@
 	@echo >> $@
+	@echo "Disabling 'best=' for $@"
+	@sed -i '/^best=/d' $@
+	@echo "best=0" >> $@
+	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
 	@echo '[r10krepo]' >> $@
 	@echo 'name=r10krepo' >> $@
 	@echo 'enabled=1' >> $@
@@ -172,15 +176,16 @@ r10krepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo 'gpgcheck=0' >> $@
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
-	@uniq -u $@ > $@~
-	@mv $@~ $@
 
 r10krepo-f30-x86_64.cfg: /etc/mock/fedora-30-x86_64.cfg
 	@echo Generating $@ from $?
 	@cat $? > $@
-	@sed -i "s/'fedora-30-x86_64'/'r10krepo-f30-x86_64'/g" $@
-	@echo '"""' >> $@
+	@sed -i 's/fedora-30-x86_64/r10krepo-f30-x86_64/g' $@
 	@echo >> $@
+	@echo "Disabling 'best=' for $@"
+	@sed -i '/^best=/d' $@
+	@echo "best=0" >> $@
+	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
 	@echo '[r10krepo]' >> $@
 	@echo 'name=r10krepo' >> $@
 	@echo 'enabled=1' >> $@
@@ -191,8 +196,6 @@ r10krepo-f30-x86_64.cfg: /etc/mock/fedora-30-x86_64.cfg
 	@echo 'gpgcheck=0' >> $@
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
-	@uniq -u $@ > $@~
-	@mv $@~ $@
 
 $(MOCKCFGS)::
 	ln -sf --no-dereference /etc/mock/$@ $@
