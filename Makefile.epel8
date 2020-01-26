@@ -15,14 +15,11 @@ RSYNCOPTS=-a --no-owner --no-group
 # Only build for epel8
 #MOCKS+=epel-7-x86_64
 MOCKS+=epel-8-x86_64
-##MOCKS+=fedora-30-x86_64
+##MOCKS+=fedora-31-x86_64
 
 #MOCKCFGS+=r10krepo-7-x86_64
-MOCKCFGS+=r10krepo-8-x86_64
-##MOCKCFGS+=r10krepo-30-x86_64
-	@for name in $(MOCKCFGS); do \
-	     touch ../$(MOCKCFGS); \
-	done
+#MOCKCFGS+=r10krepo-8-x86_64
+##MOCKCFGS+=r10krepo-31-x86_64
 
 # Local yum compatible RPM repository
 REPOBASEDIR="`/bin/pwd | xargs dirname`/r10krepo"
@@ -34,32 +31,38 @@ SPEC := `ls *.spec | head -1`
 all:: /usr/bin/createrepo
 all:: $(MOCKS)
 
-getsrc: FORCE
+.PHONY: getsrc
+getsrc:
 	spectool -g $(SPEC)
 
-srpm:: FORCE
-	@echo "Building $(SPEC) SRPM"
-	rm -rf rpmbuild
+#.PHONY:: src.rpm
+src.rpm:: Makefile
+	@rm -rf rpmbuild
+	@rm -f $@
+	@echo "Building SRPM with $(SPEC)"
 	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
 		--define '_sourcedir $(PWD)' \
 		-bs $(SPEC) --nodeps
+	mv rpmbuild/SRPMS/*.src.rpm src.rpm
+
+srpm: src.rpm
 
 # Needed for python27 compatible compilation
-build:: srpm FORCE
+.PHONY: build
+build:: srpm
 	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
 		--rebuild rpmbuild/SRPMS/*.src.rpm
 
-$(MOCKS):: srpm FORCE
-	@if [ -n "`find $@ -name \*.rpm ! -name \*.src.rpm 2>/dev/null`" ]; then \
-		echo "	Skipping $(SPEC) in $@ with RPMS"; \
+.PHONY: $(MOCKS)
+$(MOCKS):: src.rpm
+	@if [ -e $@ -a -n "`find $@ -name \*.rpm`" ]; then \
+		echo "	Skipping RPM populated $@"; \
 	else \
-		echo "Storing " rpmbuild/SRPMS/*.src.rpm "as $@.src.rpm"; \
-		install rpmbuild/SRPMS/*.src.rpm $@.src.rpm; \
-		echo "Building $@.src.rpm in $@"; \
+		echo "Actally building $? in $@"; \
 		rm -rf $@; \
 		mock -q -r $(PWD)/../$@.cfg \
-		    --resultdir=$(PWD)/$@ \
-		    $@.src.rpm; \
+		     --resultdir=$(PWD)/$@ \
+		     $?; \
 	fi
 
 mock:: $(MOCKS)
@@ -73,8 +76,8 @@ install:: $(MOCKS)
 		*-8-x86_64) yumrelease=el/8; yumarch=x86_64; ;; \
 		*-29-x86_64) yumrelease=fedora/29; yumarch=x86_64; ;; \
 		*-f29-x86_64) yumrelease=fedora/29; yumarch=x86_64; ;; \
-		*-30-x86_64) yumrelease=fedora/30; yumarch=x86_64; ;; \
-		*-f30-x86_64) yumrelease=fedora/30; yumarch=x86_64; ;; \
+		*-31-x86_64) yumrelease=fedora/31; yumarch=x86_64; ;; \
+		*-f31-x86_64) yumrelease=fedora/31; yumarch=x86_64; ;; \
 		*) echo "Unrecognized release for $$repo, exiting" >&2; exit 1; ;; \
 	    esac; \
 	    rpmdir=$(REPOBASEDIR)/$$yumrelease/$$yumarch; \
@@ -99,5 +102,3 @@ clean::
 	rm -f *.out
 
 realclean distclean:: clean
-
-FORCE:
