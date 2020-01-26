@@ -1,1 +1,1 @@
-../Makefile.r10k
+../Makefile.r10k7-r10k8
