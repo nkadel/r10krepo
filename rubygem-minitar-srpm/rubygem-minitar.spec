@@ -16,18 +16,18 @@ BuildArch: noarch
 Provides: rubygem(%gem_name) = %{version}-%{release}
 
 # Development dependencies
-Requires: rubygem(hoe) >= 3.18
-Requires: rubygem(hoe-doofus) >= 1.0
-Requires: rubygem(hoe-gemspec2) >= 1.1
-Requires: rubygem(hoe-git) >= 1.0
-Requires: rubygem(hoe-rubygems) >= 1.0
-Requires: rubygem(hoe-travis) >= 1.2
-Requires: rubygem(minitest) >= 5.11
-Requires: rubygem(minitest-autotest) >= 1.0
-Conflicts: rubygem(minitest-autotest) >= 2
-Requires: rubygem(rake) >= 10.0
-Conflicts: rubygem(rake) >= 12
-Requires: rubygem(rdoc) >= 0.0
+#Requires: rubygem(hoe) >= 3.18
+#Requires: rubygem(hoe-doofus) >= 1.0
+#Requires: rubygem(hoe-gemspec2) >= 1.1
+#Requires: rubygem(hoe-git) >= 1.0
+#Requires: rubygem(hoe-rubygems) >= 1.0
+#Requires: rubygem(hoe-travis) >= 1.2
+#Requires: rubygem(minitest) >= 5.11
+#Requires: rubygem(minitest-autotest) >= 1.0
+#Conflicts: rubygem(minitest-autotest) >= 2
+#Requires: rubygem(rake) >= 10.0
+#Conflicts: rubygem(rake) >= 12
+#Requires: rubygem(rdoc) >= 0.0
 
 %description
 The minitar library is a pure-Ruby library that provides the ability
