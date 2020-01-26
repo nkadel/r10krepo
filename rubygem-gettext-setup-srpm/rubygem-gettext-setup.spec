@@ -1,7 +1,7 @@
 %global gem_name gettext-setup
 
 Name: rubygem-%{gem_name}
-Version: 0.30
+Version: 0.34
 Release: 0%{?dist}
 Summary: Setup i18n for Ruby projects
 Group: Development/Languages
@@ -16,6 +16,20 @@ Requires:	ruby(rubygems)
 # List generated Requires explicitly
 Requires:	rubygem(gettext) >= 3.0.2
 Requires:	rubygem(locale)
+
+Requires:  rubygems(fast_gettext) >= 1.1.0
+Requires:  rubygems(gettext) >= 3.0.2
+Requires:  rubygems(locale) >= 0
+
+# Development dependencies
+#Requires:  rubygems(bundler) >= 1.3
+#Requires:  rubygems(rake) >= 0
+#Requires:  rubygems(rspec) >= 3.1
+#Requires:  rubygems(rspec-core) >= 3.1
+#Requires:  rubygems(rspec-expectations) >= 3.1
+#Requires:  rubygems(rspec-mock) >= 3.1
+#Requires:  rubygems(robocop) >= 0
+#Requires:  rubygems(simplecov) >= 0
 
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}-%{release}
