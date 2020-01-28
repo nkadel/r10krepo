@@ -8,27 +8,38 @@
 #	Set up local 
 
 # Rely on local nginx service poingint to file://$(PWD)/r10krepo
-#REPOBASE = file://$(PWD)
-REPOBASE = http://localhost
+REPOBASE = file://$(PWD)
+#REPOBASE = http://localhost
 
 # Compilable with EPEL
+EPELPKGS+=rubygem-ansi-srpm
 EPELPKGS+=rubygem-builder-srpm
-EPELPKGS+=rubygem-colored-srpm
+#EPELPKGS+=rubygem-colored-srpm
+EPELPKGS+=rubygem-colored2-srpm
 EPELPKGS+=rubygem-cri-srpm
 EPELPKGS+=rubygem-fattr-srpm
 EPELPKGS+=rubygem-gettext-setup-srpm
 EPELPKGS+=rubygem-json_pure-srpm
+EPELPKGS+=rubygem-maruku-srpm
+EPELPKGS+=rubygem-minitar-srpm
 EPELPKGS+=rubygem-minitest-srpm
 EPELPKGS+=rubygem-minitest4-srpm
 EPELPKGS+=rubygem-puppet_forge-srpm
 EPELPKGS+=rubygem-r10k-srpm
+EPELPKGS+=rubygem-ruby-progressbar-srpm
 EPELPKGS+=rubygem-session-srpm
 EPELPKGS+=rubygem-timecop-srpm
 
 # Requires other local packages
 
+# Requires rubygem-ansi-srpm and rubygem-maruku-srpm
+R10PKGSPKGS+=rubygem-minitest-reporters-srpm
+
 # Requires rubygem-minitest > 5.0.0
 R10PKGS+=rubygem-connection_pool-srpm
+
+# Requires: rubygem-minitest-reporters
+R10PKGS+=rubygem-zeitwerk-srpm
 
 # Requires rubygem-timecop-srpm
 R10KPKGS+=rubygem-concurrent-ruby-srpm
@@ -69,36 +80,35 @@ R10KPKGS+=rubygem-test-unit-rr-srpm
 # Requires rubygem-rr
 R10KPKGS+=rubygem-test-unit-notify-srpm
 
-# Requires rubygem-rubygem-test-unit-rr
+# Requires rubygem-test-unit-rr
 R10KPKGS+=rubygem-locale-srpm
 
 # Requires rubygem-text
 R10KPKGS+=rubygem-gettext-srpm
 
-FOO=BAZ
-
 REPOS+=r10krepo/el/7
 REPOS+=r10krepo/el/8
-REPOS+=r10krepo/fedora/30
+REPOS+=r10krepo/fedora/31
 
 REPODIRS := $(patsubst %,%/x86_64/repodata,$(REPOS)) $(patsubst %,%/SRPMS/repodata,$(REPOS))
 
 # No local dependencies at build time
 CFGS+=r10krepo-7-x86_64.cfg
 CFGS+=r10krepo-8-x86_64.cfg
-CFGS+=r10krepo-f30-x86_64.cfg
+CFGS+=r10krepo-f31-x86_64.cfg
 
 # Link from /etc/mock
 MOCKCFGS+=epel-7-x86_64.cfg
 MOCKCFGS+=epel-8-x86_64.cfg
-MOCKCFGS+=fedora-30-x86_64.cfg
+MOCKCFGS+=fedora-31-x86_64.cfg
 
 all:: $(CFGS) $(MOCKCFGS)
 all:: $(REPODIRS)
 all:: $(EPELPKGS)
 all:: $(R10KPKGS)
 
-all install clean getsrc:: FORCE
+.PHONY: all install clean getsrc
+all install clean getsrc::
 	@for name in $(EPELPKGS) $(R10KPKGS); do \
 		pushd $$name; \
 		$(MAKE) $(MFLAGS) $@; \
@@ -108,7 +118,8 @@ all install clean getsrc:: FORCE
 epel:: $(EPELPKGS)
 
 # Build for locacl OS
-build:: FORCE
+.PHONY: build
+build::
 	@for name in $(R10KPKGS); do \
 		pushd $$name; \
 		$(MAKE) $(MFLAGS) $@; \
@@ -118,10 +129,12 @@ build:: FORCE
 # Dependencies
 
 # Actually build in directories
-$(EPELPKGS):: FORCE
+.PHONY: $(EPELPKGS)
+$(EPELPKGS)::
 	(cd $@; $(MAKE) $(MLAGS) install)
 
-$(R10KPKGS):: FORCE
+.PHONY: $(R10KPKGS)
+$(R10KPKGS)::
 	(cd $@; $(MAKE) $(MLAGS) install)
 
 repos: $(REPOS) $(REPODIRS)
@@ -177,10 +190,10 @@ r10krepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
 
-r10krepo-f30-x86_64.cfg: /etc/mock/fedora-30-x86_64.cfg
+r10krepo-f31-x86_64.cfg: /etc/mock/fedora-31-x86_64.cfg
 	@echo Generating $@ from $?
 	@cat $? > $@
-	@sed -i 's/fedora-30-x86_64/r10krepo-f30-x86_64/g' $@
+	@sed -i 's/fedora-31-x86_64/r10krepo-f31-x86_64/g' $@
 	@echo >> $@
 	@echo "Disabling 'best=' for $@"
 	@sed -i '/^best=/d' $@
@@ -189,7 +202,7 @@ r10krepo-f30-x86_64.cfg: /etc/mock/fedora-30-x86_64.cfg
 	@echo '[r10krepo]' >> $@
 	@echo 'name=r10krepo' >> $@
 	@echo 'enabled=1' >> $@
-	@echo 'baseurl=$(REPOBASE)/r10krepo/fedora/30/x86_64/' >> $@
+	@echo 'baseurl=$(REPOBASE)/r10krepo/fedora/31/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
 	@echo 'metadata_expire=1' >> $@
@@ -200,8 +213,7 @@ r10krepo-f30-x86_64.cfg: /etc/mock/fedora-30-x86_64.cfg
 $(MOCKCFGS)::
 	ln -sf --no-dereference /etc/mock/$@ $@
 
-repo: r10krepo.repo
-r10krepo.repo:: Makefile r10krepo.repo.in
+r10krepo.repo::
 	if [ -s /etc/fedora-release ]; then \
 		cat $@.in | \
 			sed "s|@REPOBASEDIR@/|$(PWD)/|g" | \
@@ -215,19 +227,9 @@ r10krepo.repo:: Makefile r10krepo.repo.in
 		exit 1; \
 	fi
 
-r10krepo.repo:: FORCE
-	cmp -s /etc/yum.repos.d/$@ $@       
-
-
-nginx:: nginx/default.d/r10krepo.conf
-
-nginx/default.d/r10krepo.conf:: FORCE nginx/default.d/r10krepo.conf.in
-	cat $@.in | \
-		sed "s|@REPOBASEDIR@;|$(PWD)/;|g" | tee $@;
-
-nginx/default.d/r10krepo.conf:: FORCE
-	cmp -s $@ /etc/$@ || \
-	    diff -u $@ /etc/$@
+.PHONY: repo
+repo:: r10krepo.repo /etc/yum.repos.d/r10krepo.repo
+	cmp -s $? || echo 
 
 clean::
 	find . -name \*~ -exec rm -f {} \;
