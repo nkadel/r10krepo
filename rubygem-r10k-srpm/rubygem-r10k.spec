@@ -1,7 +1,7 @@
 %global gem_name r10k
 
 Name: rubygem-%{gem_name}
-Version: 3.2.0
+Version: 3.4.0
 Release: 0%{?dist}
 Summary: Puppet environment and module deployment
 Group: Development/Languages
@@ -15,16 +15,19 @@ BuildRequires: ruby(release)
 Requires:	ruby >= 2.3.0
 Requires:	ruby(rubygems)
 # Allow compilation to deduce Requires
-Requires:	rubygem(colored) = 1.2
-Requires:	rubygem(cri) >= 2.15.1
-Requires:	rubygem(cri) < 2.16
+Requires:	rubygem(colored2) = 3.1.2
+Requires:	rubygem(cri) >= 2.15.6
 Requires:	rubygem(gettext-setup) >= 0.24
-Requires:	rubygem(gettext-setup) < 1
 Requires:	rubygem(log4r) = 1.1.10
 Requires:	rubygem(multi_json) >= 1.10
-Requires:	rubygem(multi_json) < 2
-Requires:	rubygem(puppet_forge) >= 2.2
-Requires:	rubygem(puppet_forge) < 2.3
+Conflicts:	rubygem(multi_json) <= 2
+Requires:	rubygem(puppet_forge) >= 2.3
+
+# Development packages
+#Requires:	rubygem(minitar) >= 0.9.0
+#Requires:	rubygem(rake) >= 0
+#Requires:	rubygem(rspec) >= 3.1
+#Requires:	rubygem(yard) >= 0.9.11
 
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}-%{release}
@@ -91,8 +94,8 @@ sed -i 's|^#!.*|#!/usr/bin/ruby|' %{buildroot}%{gem_instdir}/bin/*
 %{gem_spec}
 %doc %{gem_instdir}/r10k.yaml.example
 %doc %{gem_instdir}/CHANGELOG.mkd
+%doc %{gem_instdir}/CODEOWNERS
 %doc %{gem_instdir}/CONTRIBUTING.mkd
-%doc %{gem_instdir}/MAINTAINERS
 %doc %{gem_instdir}/README.mkd
 
 %files doc
