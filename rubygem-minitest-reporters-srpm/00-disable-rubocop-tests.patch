@@ -1,0 +1,36 @@
+diff --git a/Rakefile b/Rakefile
+index df9276b..8a309c6 100644
+--- a/Rakefile
++++ b/Rakefile
+@@ -1,6 +1,5 @@
+ require "bundler/gem_tasks"
+ require "rake/testtask"
+-require 'rubocop/rake_task'
+ 
+ task :default => :test
+ Rake::TestTask.new do |t|
+@@ -59,12 +58,3 @@ task :reset_statistics do
+   puts "The mean time reporter statistics have been reset."
+   exit 0
+ end
+-
+-desc 'Run RuboCop on the lib directory'
+-RuboCop::RakeTask.new(:rubocop) do |task|
+-  task.patterns = ['lib/**/*.rb']
+-  # only show the files with failures
+-  task.formatters = ['clang']
+-  # don't abort rake on failure
+-  task.fail_on_error = false
+-end
+diff --git a/minitest-reporters.gemspec b/minitest-reporters.gemspec
+index 535215d..f36cda6 100644
+--- a/minitest-reporters.gemspec
++++ b/minitest-reporters.gemspec
+@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
+ 
+   s.add_development_dependency 'maruku'
+   s.add_development_dependency 'rake'
+-  s.add_development_dependency 'rubocop'
+ 
+   s.files         = `git ls-files`.split("\n")
+   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
