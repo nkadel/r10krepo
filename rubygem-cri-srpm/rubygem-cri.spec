@@ -1,7 +1,7 @@
 %global gem_name cri
 
 Name: rubygem-%{gem_name}
-Version: 2.15.7
+Version: 2.15.6
 Release: 0%{?dist}
 Summary: Colorize ruby gems
 Group: Development/Languages

@@ -3,7 +3,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 2.2.0
-#Release: 2%{?dist}
+#Release: 2%%{?dist}
 Release: 0.1%{?dist}
 Summary: Generic connection pool for Ruby
 Group: Development/Languages

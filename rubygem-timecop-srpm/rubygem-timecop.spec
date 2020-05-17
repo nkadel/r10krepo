@@ -2,7 +2,7 @@
 
 Summary: Provides a unified method to mock Time.now, Date.today in a single call
 Name: rubygem-%{gem_name}
-Version: 0.7.1
+Version: 0.9.1
 #Release: 8%%{?dist}
 Release: 0%{?dist}
 License: MIT
@@ -10,11 +10,11 @@ URL: https://github.com/travisjeffery/timecop
 Source0: http://rubygems.org/downloads/%{gem_name}-%{version}.gem
 # Go with plain minitest.
 # https://github.com/travisjeffery/timecop/commit/c30897f67ad90f0582c0ed0d7b78f46a7142f113
-Patch0: rubygem-timecop-0.7.1-Use-minitest.patch
+#Patch0: rubygem-timecop-0.7.1-Use-minitest.patch
 BuildRequires: rubygems-devel
-BuildRequires: rubygem(activesupport)
-BuildRequires: rubygem(minitest)
-BuildRequires: rubygem(mocha)
+#BuildRequires: rubygem(activesupport)
+#BuildRequires: rubygem(minitest)
+#BuildRequires: rubygem(mocha)
 BuildArch: noarch
 Provides: rubygem(%gem_name) = %{version}-%{release}
 
@@ -34,9 +34,9 @@ Documentation for %{name}.
 %setup -q -c -T 
 %gem_install -n %{SOURCE0}
 
-pushd .%{gem_instdir}
-%patch0 -p1
-popd
+#pushd .%{gem_instdir}
+#%%patch0 -p1
+#popd
 
 %build
 
@@ -46,15 +46,15 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -va ./%{gem_dir}/* %{buildroot}%{gem_dir}
 
 # Fix permissions.
-chmod a+x %{buildroot}%{gem_instdir}/test/run_tests.sh
+#chmod a+x %{buildroot}%{gem_instdir}/test/run_tests.sh
 
 %check
 pushd .%{gem_instdir}/test
 # Drop Bundler dependency.
 sed -i '/bundler\/setup/ s/^/#/' test_helper.rb
 
-./run_tests.sh || \
-    echo Error: failed checks
+#./run_tests.sh || \
+#    echo Error: failed checks
 popd
 
 %files
@@ -71,6 +71,10 @@ popd
 %{gem_docdir}
 
 %changelog
+* Mon Jan 27 2020 Nico Kadel-Garcia <nkadel@gmail.com> - 0.9.1-0
+- Update to 0.9.1
+- Drop all dependencies and disable most checks
+
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.7.1-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 

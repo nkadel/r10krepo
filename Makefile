@@ -29,11 +29,14 @@ EPELPKGS+=rubygem-r10k-srpm
 EPELPKGS+=rubygem-ruby-progressbar-srpm
 EPELPKGS+=rubygem-session-srpm
 EPELPKGS+=rubygem-timecop-srpm
+EPELPKGS+=rubygem-webmock-srpm
 
 # Requires other local packages
 
+R10PKGS+=rubygem-thor-srpm
+
 # Requires rubygem-ansi-srpm and rubygem-maruku-srpm
-R10PKGSPKGS+=rubygem-minitest-reporters-srpm
+R10PKGS+=rubygem-minitest-reporters-srpm
 
 # Requires rubygem-minitest > 5.0.0
 R10PKGS+=rubygem-connection_pool-srpm
@@ -47,7 +50,7 @@ R10KPKGS+=rubygem-concurrent-ruby-srpm
 # Requires rubygem-concurrent-ruby
 R10KPKGS+=rubygem-rb-inotify-srpm
 
-# Requires rubygem-rb-notify
+# Requires rubygem-rb-notify and rubygem-thor-srpm
 R10KPKGS+=rubygem-listen-srpm
 
 # Requires rubygem-concurrent-ruby

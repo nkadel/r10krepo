@@ -4,16 +4,17 @@
 %global		repoid			67096
 
 Name:		rubygem-%{gem_name}
-Version:	3.2.9
+Version:	3.3.2
 #Release:	5%%{?dist}
 Release:	0%{?dist}
 Summary:	RubyGem of Localization Library and Tools for Ruby
 
 License:	Ruby
-URL:		http://www.yotabanana.com/hiki/ruby-gettext.html?ruby-gettext
-Source0:	http://gems.rubyforge.org/gems/%{gem_name}-%{version}.gem
+URL:		https://www.yotabanana.com/hiki/ruby-gettext.html?ruby-gettext
+Source0:        https://rubygems.org/gems/%{gem_name}-%{version}.gem
+
 # https://github.com/ruby-gettext/gettext/commit/49b9f4ca66583395ddfa91503afd7593f069de18
-Patch0:	rubygem-gettext-3.2.9-ruby26-compat-test.patch
+#Patch0:	rubygem-gettext-3.2.9-ruby26-compat-test.patch
 
 Requires:	ruby(release)
 BuildRequires:	ruby(release)
@@ -30,8 +31,7 @@ BuildRequires:	gettext
 
 Requires:	ruby(rubygems)
 Requires:	rubygem(locale) >= %{locale_ver}
-Requires:	rubygem(text)
-Requires:	irb
+Requires:	rubygem(text) >= 1.3.0
 Provides:	rubygem(%{gem_name}) = %{version}-%{release}
 
 Obsoletes: ruby-gettext-package <= %{version}-%{release}
@@ -66,7 +66,7 @@ gem unpack %{SOURCE0}
 cd %{gem_name}-%{version}
 
 #Patches, etc
-%patch0 -p1
+#%patch0 -p1
 
 gem specification -l --ruby %{SOURCE0} > %{gem_name}.gemspec
 

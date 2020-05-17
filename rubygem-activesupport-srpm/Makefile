@@ -1,1 +1,1 @@
-../Makefile.r10k
+../Makefile.epel7-8.f31
