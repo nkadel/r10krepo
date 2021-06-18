@@ -1,106 +1,86 @@
-%global gem_name r10k
+# Generated from r10k-3.9.1.gem by gem2rpm -*- rpm-spec -*-
+%define rbname r10k
+%define version 3.9.1
+%define release 0
 
-Name: rubygem-%{gem_name}
-Version: 3.4.0
-Release: 0%{?dist}
 Summary: Puppet environment and module deployment
-Group: Development/Languages
-License: GPLv2+ or Artistic or MIT
-URL: https://github.com/halostatue/r10k
-Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
-BuildRequires: rubygems-devel
-BuildRequires: rubygem(rspec)
-BuildRequires: ruby(release)
+Name: ruby-gems-%{rbname}
 
-Requires:	ruby >= 2.3.0
-Requires:	ruby(rubygems)
-# Allow compilation to deduce Requires
-Requires:	rubygem(colored2) = 3.1.2
-Requires:	rubygem(cri) >= 2.15.6
-Requires:	rubygem(gettext-setup) >= 0.24
-Requires:	rubygem(log4r) = 1.1.10
-Requires:	rubygem(multi_json) >= 1.10
-Conflicts:	rubygem(multi_json) <= 2
-Requires:	rubygem(puppet_forge) >= 2.3
-
-# Development packages
-#Requires:	rubygem(minitar) >= 0.9.0
-#Requires:	rubygem(rake) >= 0
-#Requires:	rubygem(rspec) >= 3.1
-#Requires:	rubygem(yard) >= 0.9.11
-
+Version: %{version}
+Release: %{release}
+Group: Development/Ruby
+License: Distributable
+URL: https://github.com/puppetlabs/r10k
+Source0: %{rbname}-%{version}.gem
+# Make sure the spec template is included in the SRPM
+Source1: ruby-gems-%{rbname}.spec.in
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+Requires: ruby [">= 2.3.0"]
+Requires: ruby-gems >= 2.0.14.1
+Requires: ruby-gems-colored2 = 3.1.2
+Requires: ruby-gems-cri = 2.15.10
+Requires: ruby-gems-log4r = 1.1.10
+Requires: ruby-gems-multi_json >= 1.10
+Requires: ruby-gems-multi_json < 2
+Requires: ruby-gems-puppet_forge >= 2.3.0
+Requires: ruby-gems-puppet_forge < 2.4
+Requires: ruby-gems-gettext-setup >= 0.24
+Requires: ruby-gems-gettext-setup < 1
+Requires: ruby-gems-fast_gettext >= 1.1.0
+Requires: ruby-gems-fast_gettext < 1.2
+Requires: ruby-gems-gettext >= 3.0.2
+Requires: ruby-gems-gettext < 3.3.0
+Requires: ruby-gems-rspec >= 3.1
+Requires: ruby-gems-rspec < 4
+Requires: ruby-gems-rake 
+Requires: ruby-gems-yard >= 0.9.11
+Requires: ruby-gems-yard < 0.10
+Requires: ruby-gems-minitar >= 0.9.0
+Requires: ruby-gems-minitar < 0.10
+BuildRequires: ruby [">= 2.3.0"]
+BuildRequires: ruby-gems >= 2.0.14.1
 BuildArch: noarch
-Provides: rubygem(%{gem_name}) = %{version}-%{release}
+Provides: ruby(R10k) = %{version}
+
+%define gemdir /home/nkadelgarcia/.gem/ruby
+%define gembuilddir %{buildroot}%{gemdir}
 
 %description
-R10k provides a general purpose toolset for deploying Puppet environments and
-modules. It implements the [Puppetfile](doc/puppetfile.mkd) format and provides a native
-implementation of Puppet [dynamic environments][workflow].
-
-%package doc
-Summary: Documentation for %{name}
-Group: Documentation
-Requires: %{name} = %{version}-%{release}
-BuildArch: noarch
-
-%description doc
-Documentation for %{name}.
+R10K provides a general purpose toolset for deploying Puppet environments
+and modules.
+It implements the Puppetfile format and provides a native implementation of
+Puppet
+dynamic environments.
 
 %prep
-%setup -q -c  -T
-%gem_install -n %{SOURCE0}
-
+%setup -T -c
 
 %build
 
 %install
-mkdir -p %{buildroot}%{gem_dir}
-cp -a .%{gem_dir}/* \
-        %{buildroot}%{gem_dir}/
+%{__rm} -rf %{buildroot}
+mkdir -p %{gembuilddir}
+gem install --local --install-dir %{gembuilddir} --force %{SOURCE0}
+mkdir -p %{buildroot}/%{_bindir}
+mv %{gembuilddir}/bin/* %{buildroot}/%{_bindir}
+rmdir %{gembuilddir}/bin
 
-
-mkdir -p %{buildroot}%{_bindir}
-cp -pa .%{_bindir}/* \
-        %{buildroot}%{_bindir}/
-
-find %{buildroot}%{gem_instdir}/bin -type f | xargs chmod a+x
-
-# Fix shebangs.
-sed -i 's|^#!.*|#!/usr/bin/ruby|' %{buildroot}%{gem_instdir}/bin/*
-
-    # Disable chck until further notice
-#%if ! 0%{?bootstrap}
-#%check
-#pushd .%{gem_instdir}
-#rspec spec
-#popd
-#%endif
+%clean
+%{__rm} -rf %{buildroot}
 
 %files
-%dir %{gem_instdir}
-%{_bindir}/%{gem_name}
-%license %{gem_instdir}/LICENSE
-%exclude %{gem_instdir}/.*
-%exclude %{gem_instdir}/Gemfile
-%exclude %{gem_cache}
-%{gem_instdir}/%{gem_name}.gemspec
-%{gem_instdir}/azure-pipelines.yml
-%{gem_instdir}/bin
-%{gem_instdir}/locales
-%{gem_instdir}/docker
-%{gem_instdir}/integration
-%{gem_instdir}/spec
-%{gem_libdir}
-%{gem_spec}
-%doc %{gem_instdir}/r10k.yaml.example
-%doc %{gem_instdir}/CHANGELOG.mkd
-%doc %{gem_instdir}/CODEOWNERS
-%doc %{gem_instdir}/CONTRIBUTING.mkd
-%doc %{gem_instdir}/README.mkd
+%defattr(-, root, root)
+%{_bindir}/r10k
+%{gemdir}/gems/r10k-3.9.1/
+%{gemdir}/gems/r10k-3.9.1/path
+%{gemdir}/gems/r10k-3.9.1/
+%{gemdir}/gems/r10k-3.9.1/path
+%{gemdir}/gems/r10k-3.9.1/
+%{gemdir}/gems/r10k-3.9.1/path
+%{gemdir}/gems/r10k-3.9.1/
 
-%files doc
-%doc %{gem_docdir}
-%doc %{gem_instdir}/doc/
-%{gem_instdir}/Rakefile
+%doc %{gemdir}/doc/r10k-3.9.1
+%{gemdir}/cache/r10k-3.9.1.gem
+%{gemdir}/specifications/r10k-3.9.1.gemspec
 
 %changelog
