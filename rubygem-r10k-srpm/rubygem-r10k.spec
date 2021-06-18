@@ -15,7 +15,7 @@ Source0: %{rbname}-%{version}.gem
 # Make sure the spec template is included in the SRPM
 Source1: ruby-gems-%{rbname}.spec.in
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
-Requires: ruby [">= 2.3.0"]
+Requires: ruby >= 2.3.0
 Requires: ruby-gems >= 2.0.14.1
 Requires: ruby-gems-colored2 = 3.1.2
 Requires: ruby-gems-cri = 2.15.10
@@ -37,7 +37,7 @@ Requires: ruby-gems-yard >= 0.9.11
 Requires: ruby-gems-yard < 0.10
 Requires: ruby-gems-minitar >= 0.9.0
 Requires: ruby-gems-minitar < 0.10
-BuildRequires: ruby [">= 2.3.0"]
+BuildRequires: ruby >= 2.3.0
 BuildRequires: ruby-gems >= 2.0.14.1
 BuildArch: noarch
 Provides: ruby(R10k) = %{version}
