@@ -91,19 +91,19 @@ R10KPKGS+=rubygem-gettext-srpm
 
 REPOS+=r10krepo/el/7
 REPOS+=r10krepo/el/8
-REPOS+=r10krepo/fedora/31
+REPOS+=r10krepo/fedora/34
 
 REPODIRS := $(patsubst %,%/x86_64/repodata,$(REPOS)) $(patsubst %,%/SRPMS/repodata,$(REPOS))
 
 # No local dependencies at build time
 CFGS+=r10krepo-7-x86_64.cfg
 CFGS+=r10krepo-8-x86_64.cfg
-CFGS+=r10krepo-f31-x86_64.cfg
+CFGS+=r10krepo-f34-x86_64.cfg
 
 # Link from /etc/mock
 MOCKCFGS+=epel-7-x86_64.cfg
 MOCKCFGS+=epel-8-x86_64.cfg
-MOCKCFGS+=fedora-31-x86_64.cfg
+MOCKCFGS+=fedora-34-x86_64.cfg
 
 all:: $(CFGS) $(MOCKCFGS)
 all:: $(REPODIRS)
@@ -147,7 +147,7 @@ $(REPOS):
 .PHONY: $(REPODIRS)
 $(REPODIRS): $(REPOS)
 	@install -d -m 755 `dirname $@`
-	/usr/bin/createrepo -q `dirname $@`
+	createrepo_c -q `dirname $@`
 
 
 .PHONY: cfg cfgs
@@ -193,10 +193,10 @@ r10krepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
 
-r10krepo-f31-x86_64.cfg: /etc/mock/fedora-31-x86_64.cfg
+r10krepo-f34-x86_64.cfg: /etc/mock/fedora-34-x86_64.cfg
 	@echo Generating $@ from $?
 	@cat $? > $@
-	@sed -i 's/fedora-31-x86_64/r10krepo-f31-x86_64/g' $@
+	@sed -i 's/fedora-34-x86_64/r10krepo-f34-x86_64/g' $@
 	@echo >> $@
 	@echo "Disabling 'best=' for $@"
 	@sed -i '/^best=/d' $@
@@ -205,7 +205,7 @@ r10krepo-f31-x86_64.cfg: /etc/mock/fedora-31-x86_64.cfg
 	@echo '[r10krepo]' >> $@
 	@echo 'name=r10krepo' >> $@
 	@echo 'enabled=1' >> $@
-	@echo 'baseurl=$(REPOBASE)/r10krepo/fedora/31/x86_64/' >> $@
+	@echo 'baseurl=$(REPOBASE)/r10krepo/fedora/34/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
 	@echo 'metadata_expire=1' >> $@
